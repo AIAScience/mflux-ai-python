@@ -11,22 +11,20 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = [ ]
+requirements = ['requests', ]
 
 setup_requirements = ['pytest-runner', ]
 
 test_requirements = ['pytest', ]
 
 setup(
-    author="Meklit Elfiyos Dekita",
-    author_email='me@aiascience.com',
+    author="AIA Science AS",
+    author_email='mflux.ai@aiascience.com',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Natural Language :: English',
-        "Programming Language :: Python :: 2",
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
@@ -39,7 +37,7 @@ setup(
     long_description=readme + '\n\n' + history,
     include_package_data=True,
     keywords='mflux_ai',
-    name='mflux_ai',
+    name='mflux-ai',
     packages=find_packages(include=['mflux_ai']),
     setup_requires=setup_requirements,
     test_suite='tests',
