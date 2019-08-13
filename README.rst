@@ -6,8 +6,8 @@ mflux-ai
 .. image:: https://img.shields.io/pypi/v/mflux_ai.svg
         :target: https://pypi.python.org/pypi/mflux_ai
 
-.. image:: https://img.shields.io/travis/meklitAIA/mflux_ai.svg
-        :target: https://travis-ci.org/meklitAIA/mflux_ai
+.. image:: https://img.shields.io/travis/AIAScience/mflux_ai.svg
+        :target: https://travis-ci.org/AIAScience/mflux_ai
 
 .. image:: https://readthedocs.org/projects/mflux-ai/badge/?version=latest
         :target: https://mflux-ai.readthedocs.io/en/latest/?badge=latest

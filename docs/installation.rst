@@ -32,13 +32,13 @@ You can either clone the public repository:
 
 .. code-block:: console
 
-    $ git clone git://github.com/meklitAIA/mflux_ai
+    $ git clone git://github.com/AIAScience/mflux_ai
 
 Or download the `tarball`_:
 
 .. code-block:: console
 
-    $ curl  -OL https://github.com/meklitAIA/mflux_ai/tarball/master
+    $ curl  -OL https://github.com/AIAScience/mflux_ai/tarball/master
 
 Once you have a copy of the source, you can install it with:
 
@@ -47,5 +47,5 @@ Once you have a copy of the source, you can install it with:
     $ python setup.py install
 
 
-.. _Github repo: https://github.com/meklitAIA/mflux_ai
-.. _tarball: https://github.com/meklitAIA/mflux_ai/tarball/master
+.. _Github repo: https://github.com/AIAScience/mflux_ai
+.. _tarball: https://github.com/AIAScience/mflux_ai/tarball/master
