@@ -31,7 +31,6 @@ def test_mflux_ai():
     )
 
     assert mflux_client.get_env_vars() == content
-    assert mflux_client.get_env_vars() == content
     assert mflux_client.set_env_vars() == True
     assert os.environ.get("MLFLOW_TRACKING_URI") == content["mlflow_server"]
     assert os.environ.get("MLFLOW_S3_ENDPOINT_URL") == content["minio_server"]
