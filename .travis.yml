@@ -1,29 +1,30 @@
-# Config file for automatic testing at travis-ci.org
-
 language: python
-python:
-  - 3.6
-  - 3.5
-  - 3.4
-  - 2.7
-
-# Command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
+matrix:
+  include:
+  - name: Python 3.7.1 on Xenial Linux
+    python: 3.7
+    dist: xenial
+  - name: Python 3.7.2 on macOS
+    os: osx
+    osx_image: xcode10.2
+    language: shell
+  - name: Python 3.7.3 on Windows
+    os: windows
+    language: shell
+    before_install:
+    - choco install python
+    - python -m pip install --upgrade pip
+    env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
 install: pip install -U tox-travis
-
-# Command to run tests, e.g. python setup.py test
 script: tox
-
-# Assuming you have installed the travis-ci CLI tool, after you
-# create the Github repo and add it to Travis, run the
-# following command to finish PyPI deployment setup:
-# $ travis encrypt --add deploy.password
 deploy:
   provider: pypi
   distributions: sdist bdist_wheel
   user: AIAScience
+  server: https://testpypi.python.org/pypi
   password:
-    secure: PLEASE_REPLACE_ME
+    secure: Y86LNp+aDWC/2kFVPiI43wrdWn1ln4/ZpRiHCZWZcKxYTli0EE8QJXi/Ud7Xr5RNR5h0XCJk/XGaxO7Xt3dmcN9nuaWamDPio4AxyoCVk2ThF1wuys+5BVU9TeEBYYCoQSltm1WE355fvMZdh0cSjT4owpOCxaa5V+UjLh5sRCtRg2zxzekxjpb38WUe4FKN0TdjxeuHHCGU6CqsODHGzTXPG53abDrdRdGle/mW1tPcw+LWUdW4QByKF8cbz/odZP7WaWR+6ictLvd1+Rg25PHbkgzif1sLumVc/+CIGTcF4NPkdfl5RKrngfavMw8NfUAEkOgBplPRsJweVvdRGmY6H6ICqS/Oe86JJgsYxh+jil42poVslGwPnx2lXc6hkenVzJYuuKxP6jQSKQ4GhCgS7uEtLJsBK1Hq7IgQQvLq2d1tytVDQwemEYFn43KHtFNTFA3vdi27W0k+Mr3NT0iw4qvVAYROu/TZ7yTMsJnFQURcxWpQ6VPebuxtZHfudf4IBz3Dv00evwCuv6vLfqMqvSPRlb+UhPBorTfxm3pdGAkSPY3Vs+68mQ+mm36I76Kl7BeDjGoSeIyvk1fGjfTrmATe1RL5dM+LOCtcFfal2r8RMRoo1GLCKXCrIft+UnS5V8nGwn8tAQHbOEqDvv2aMRJ5KUZE4n0urR+sOmw=
   on:
     tags: true
-    repo: AIAScience/mflux_ai
+    repo: aiascience/mflux_ai
     python: 3.6
