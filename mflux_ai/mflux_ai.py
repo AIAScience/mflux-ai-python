@@ -6,7 +6,7 @@ import os
 
 import requests
 
-SERVER_HOST = "http://mflux.ai"
+SERVER_HOST = "https://www.mflux.ai"
 
 
 class MfluxClient(object):
