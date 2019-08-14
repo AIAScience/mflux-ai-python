@@ -21,7 +21,7 @@ def test_mflux_ai():
 
     responses.add(
         responses.Response(
-            method="GET", url=SERVER_HOST + "/env_vars/", json=content, status=200
+            method="GET", url=SERVER_HOST + "/api/env_vars/", json=content, status=200
         )
     )
 
