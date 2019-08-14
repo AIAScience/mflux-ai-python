@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-from mflux_ai.mflux_ai import MfluxClient
-from mflux_ai.mflux_ai import *
+from .mflux_ai import *
 """Top-level package for mflux-ai."""
 
-__author__ = """Meklit Elfiyos Dekita"""
-__email__ = "me@aiascience.com"
+__author__ = """AIA Science AS"""
+__email__ = "mflux.ai@aiascience.com"
 __version__ = "0.1.0"
 
 
