@@ -6,7 +6,6 @@ Welcome to mflux-ai's documentation!
    :caption: Contents:
 
    readme
-   installation
    usage
    modules
    contributing
