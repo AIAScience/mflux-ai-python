@@ -39,7 +39,7 @@ Import mflux_ai
 
     Import  mflux-ai
 
-    mflux_ai.set_env_vars(token="9s9kQ0D86wWKUHdPMj0HHA", server_host"http://localhost:8000")
+    mflux_ai.set_env_vars(token="9s9kQ0D86wWKUHdPMj0HHA", server_host"http://www.your-sever-name.mflux.ai")
 
 
 More example
@@ -50,7 +50,7 @@ You can also use MfluxClient from mflux_ai
 
     # create instance of mflux client
 
-    client = MfluxClient(token="9s9kQ0D86wWKUHdPMj0HHA", server_host"http://localhost:8000")
+    client = MfluxClient(token="9s9kQ0D86wWKUHdPMj0HHA", server_host"http://www.your-sever-name.mflux.ai")
 
     # set environment variables required for the project
 
