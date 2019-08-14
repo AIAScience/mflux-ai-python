@@ -20,7 +20,7 @@ def test_mflux_ai():
     responses.add(
         responses.Response(
             method="GET",
-            url="http://mflux-server.com/env_vars",
+            url="http://mflux-server.com/api/env_vars/",
             json=content,
             status=200,
         )
