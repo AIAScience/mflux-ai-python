@@ -5,7 +5,9 @@
 import os
 
 import responses
-from mflux_ai.mflux_ai import MfluxClient
+
+import mflux_ai
+from mflux_ai import MfluxClient
 
 
 @responses.activate
@@ -36,3 +38,9 @@ def test_mflux_ai():
     assert os.environ.get("MLFLOW_S3_ENDPOINT_URL") == content["minio_server"]
     assert os.environ.get("AWS_SECRET_ACCESS_KEY") == content["minio_secret_key"]
     assert os.environ.get("AWS_ACCESS_KEY_ID") == content["minio_access_key"]
+    assert (
+        mflux_ai.set_env_vars(
+            token="thisshouldbevalidtoken", server_host="http://mflux-server.com"
+        )
+        == True
+    )

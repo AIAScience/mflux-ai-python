@@ -16,22 +16,53 @@ mflux-ai
 
 
 
-Open source code for the mflux-ai python package
+Official the mflux-ai python library.
+
 
 
 * Free software: BSD license
 * Documentation: https://mflux-ai.readthedocs.io.
 
-
 Features
 --------
+- acquire and set environment variables required by mflux-server
+- cache the environment variables
 
-* TODO
 
-Credits
--------
+Quickstart
+----------
+Install mflux-ai
 
-This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
+    pip install mflux-ai
 
-.. _Cookiecutter: https://github.com/audreyr/cookiecutter
-.. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
+Import mflux_ai
+
+    Import  mflux-ai
+
+    mflux_ai.mflux_ai.set_env_vars(token="9s9kQ0D86wWKUHdPMj0HHA", server_host"http://localhost:8000")
+
+
+More example
+------------
+You can also use MfluxClient from mflux_ai
+
+    from mflux_ai import MfluxClient
+
+    # create instance of mflux client
+
+    client = MfluxClient(token="9s9kQ0D86wWKUHdPMj0HHA", server_host"http://localhost:8000")
+
+    # set environment variables required for the project
+
+    client.set_env_vars()
+
+    # save the environment variables to file
+
+    client.save_cache_to_file()
+
+    # set the  environment variables from the cache file
+
+    client.set_env_vars_from_cache_file()
+
+
+
