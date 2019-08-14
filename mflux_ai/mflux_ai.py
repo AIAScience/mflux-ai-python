@@ -57,6 +57,15 @@ class MfluxClient(object):
         except FileNotFoundError:
             print("Could not open file:", self.cache_file_name)
 
+    def set_env_vars_from_cache_file(self):
+        try:
+            with open(self.cache_file_name, "r") as cache_file:
+                self.variables = json.load(cache_file)
+                self.set_env_vars()
+
+        except FileNotFoundError:
+            print("Could not open file:", self.cache_file_name)
+
     def save_cache_to_file(self):
         if self.variables:
             try:

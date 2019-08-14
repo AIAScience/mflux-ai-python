@@ -21,7 +21,6 @@ deploy:
   provider: pypi
   distributions: sdist bdist_wheel
   user: aiascience
-  server: https://test.pypi.org/legacy/
   password:
     secure: HS06Jj+E0gzN+EUSt1T9+5DfB8KhCTKA8fRCUvPnTl8C43T+3O/p5IuFYs/8R7nbkh0/iju8ph0Li8UY2pqTpJ1UamG2ZSy03+wBR5uoE5Br/5J58/36mwnH/OOoq0Y+xc4fosTaNPklsFmeV8ZjN9j2EZ+bCNjiI7pKM1brHpO++PZKmwU637IvovFYvbbW0PgpNuPjJbr+ES7EazqXbeTqTTJu8uCQ9vF130bhucii5Lk2bOezR6p5R1+V44RelhbbfjJcRveH+SS5OaTayK8gZ38unBlsjumX7ise8DNtC47mXsaN5pcfdbqvTorAYkJ0S9TlSkvAUWIyC9iQDLftlZXGMOwBkVTNnoAHVWjd96YBzHjYgbql54JLN971Hp/O/cfwHCjBjInJgqIEbEwdXJVs7VZJc4ZglNwDuTVkatOC4A+NML9uy9Nyrp6zcLZPSaMjRrCEnkuECA1YnYprBSomY6FJLDszHGVK08W9cB6dOmg0O6uJ9PR/ih6Y2M7/jkpLm6jdYFwUbGaknUE0cZqPNRqGewvC+jdUyyXncK+thPLJgCiRJz7uPWvJCu99zc7znGxTfvSTx6BS2AE70YwAhhQDMvhMba7QTLrsGbKXQZGhc8bKwm8Wa1R2nRY1dj4CLlZkCemTE1Q6xpf4alYLEkDBO84AA5hOuIs=
   on:
