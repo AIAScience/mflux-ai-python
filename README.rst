@@ -39,30 +39,8 @@ Import mflux_ai
 
     Import  mflux-ai
 
-    mflux_ai.mflux_ai.set_env_vars(token="9s9kQ0D86wWKUHdPMj0HHA", server_host"http://localhost:8000")
+    mflux_ai.set_env_vars(token="9s9kQ0D86wWKUHdPMj0HHA")
 
-
-More example
-------------
-You can also use MfluxClient from mflux_ai
-
-    from mflux_ai import MfluxClient
-
-    # create instance of mflux client
-
-    client = MfluxClient(token="9s9kQ0D86wWKUHdPMj0HHA", server_host"http://localhost:8000")
-
-    # set environment variables required for the project
-
-    client.set_env_vars()
-
-    # save the environment variables to file
-
-    client.save_cache_to_file()
-
-    # set the  environment variables from the cache file
-
-    client.set_env_vars_from_cache_file()
 
 
 
