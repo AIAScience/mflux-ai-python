@@ -1,6 +1,4 @@
-* Bump version number in setup.py
-* Check that all unit tests are OK
-* Run the demo and listen to the sounds to empirically check the results
+Upload the python package to https://test.pypi.org/
+
 * `python setup.py sdist bdist_wheel`
-* `python -m twine upload dist/*`
-* Add git tag
+* `twine upload --repository-url https://test.pypi.org/legacy/ dist/*`
