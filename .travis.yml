@@ -15,18 +15,14 @@ matrix:
     - choco install python
     - python -m pip install --upgrade pip
     env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
-install:
-  - pip install pipenv
-  - pipenv install --dev --skip-lock
-  - pipenv install -r requirements_dev.txt
-
-script: pipenv run pytest
+install: pip install -U tox-travis
+script: tox
 deploy:
   provider: pypi
   distributions: sdist bdist_wheel
   user: aiascience
   server: https://test.pypi.org/legacy/
   password:
-    secure: Xras0/zUaXaM7c9nXFL+UP+c7mfi2lf7rAnK67Myii8nrBw/IcZZsJVn5hGyOjo3O1EyJfklrd5Tkza+RZQ/yODCc5H6UaDwTeAruivX/hs1htFfRJQcNSs3FqnIKk8NxwlBxk22p1OUrh4t3+efkTglmrSXjy/4pE7t29lk2hWJj3YxYqa8sQWiLcGH3kB154hDehCtPEhge/6OoJpqtRVu/EY6CQ1YBVtXCvHr5Y1AjcdNsqFR/0JG/h3T6WMx0sU6/VcQq7rZfsSEWIOSdqp/eyqZxrNNAKNbpeZZDVtM6WS1zUr1o3ZwnzMXFDeVFjHIQWkziymkDmOo5Xvm4O4hFcImccUlZbs51ZhoUvalICQ4EwjzhSa6l3fDWreFwNhlFxaUSSCKmd53lexsKfKM4ioWK+J3ciRFHiaMLS8f9mC+RdnyL88DlzXfLrw0ap0/oyYMm59NtMq9rA3lAtS2L4Kz4EoH3V6D6WLtYCUke8kxdwsBhjuN0B4e/N5fZro8x0iCcdAjve/1HamCjtrePGcdgt05NVrlUb40VjIlxLtbNT+1cb0XPc8QXFeOb4vscdTnFbCmE2kXwu/84BSEUCH+rLlzNuSDH5VBc9Tb0604IzR77WGyOgzBdsoXt8IoEeUg2xSobZ6bFFx65XxX2N3WcATMGC83wN+tY/o=
+    secure: HS06Jj+E0gzN+EUSt1T9+5DfB8KhCTKA8fRCUvPnTl8C43T+3O/p5IuFYs/8R7nbkh0/iju8ph0Li8UY2pqTpJ1UamG2ZSy03+wBR5uoE5Br/5J58/36mwnH/OOoq0Y+xc4fosTaNPklsFmeV8ZjN9j2EZ+bCNjiI7pKM1brHpO++PZKmwU637IvovFYvbbW0PgpNuPjJbr+ES7EazqXbeTqTTJu8uCQ9vF130bhucii5Lk2bOezR6p5R1+V44RelhbbfjJcRveH+SS5OaTayK8gZ38unBlsjumX7ise8DNtC47mXsaN5pcfdbqvTorAYkJ0S9TlSkvAUWIyC9iQDLftlZXGMOwBkVTNnoAHVWjd96YBzHjYgbql54JLN971Hp/O/cfwHCjBjInJgqIEbEwdXJVs7VZJc4ZglNwDuTVkatOC4A+NML9uy9Nyrp6zcLZPSaMjRrCEnkuECA1YnYprBSomY6FJLDszHGVK08W9cB6dOmg0O6uJ9PR/ih6Y2M7/jkpLm6jdYFwUbGaknUE0cZqPNRqGewvC+jdUyyXncK+thPLJgCiRJz7uPWvJCu99zc7znGxTfvSTx6BS2AE70YwAhhQDMvhMba7QTLrsGbKXQZGhc8bKwm8Wa1R2nRY1dj4CLlZkCemTE1Q6xpf4alYLEkDBO84AA5hOuIs=
   on:
     branch: master
