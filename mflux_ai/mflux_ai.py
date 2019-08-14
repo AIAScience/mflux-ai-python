@@ -11,7 +11,7 @@ SERVER_HOST = "https://www.mflux.ai"
 
 class MfluxClient(object):
     def __init__(self, token, server_host=SERVER_HOST):
-        server_ip = server_host + "/env_vars"
+        server_ip = server_host + "/env_vars/"
         token = token  # yourAccessTokenHere#
         headers = {
             "Content-Type": "application/json",

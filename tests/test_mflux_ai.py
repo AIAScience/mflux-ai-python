@@ -20,7 +20,9 @@ def test_mflux_ai():
     }
 
     responses.add(
-        responses.Response(method="GET", url=SERVER_HOST+"/env_vars", json=content, status=200)
+        responses.Response(
+            method="GET", url=SERVER_HOST + "/env_vars/", json=content, status=200
+        )
     )
 
     mflux_client = MfluxClient(token="thisshouldbevalidtoken")
