@@ -2,6 +2,11 @@
 History
 =======
 
+v0.3.0 (2019-08-16)
+-------------------
+
+* Add a function :code:`init` that will eventually replace :code:`set_env_vars`. Check if the provided project token is valid.
+
 v0.2.1 (2019-08-16)
 -------------------
 
