@@ -1,5 +1,3 @@
-.. highlight:: shell
-
 ============
 Contributing
 ============
@@ -15,7 +13,7 @@ Types of Contributions
 Report Bugs
 ~~~~~~~~~~~
 
-Report bugs at https://github.com/AIAScience/mflux_ai/issues.
+Report bugs at https://github.com/AIAScience/mflux-ai-python/issues.
 
 If you are reporting a bug, please include:
 
@@ -38,31 +36,29 @@ and "help wanted" is open to whoever wants to implement it.
 Write Documentation
 ~~~~~~~~~~~~~~~~~~~
 
-mflux-ai could always use more documentation, whether as part of the
-official mflux-ai docs, in docstrings, or even on the web in blog posts,
+mflux-ai-python could always use more documentation, whether as part of the
+official mflux-ai-python docs, in docstrings, or even on the web in blog posts,
 articles, and such.
 
 Submit Feedback
 ~~~~~~~~~~~~~~~
 
-The best way to send feedback is to file an issue at https://github.com/AIAScience/mflux_ai/issues.
+The best way to send feedback is to file an issue at https://github.com/AIAScience/mflux-ai-python/issues.
 
 If you are proposing a feature:
 
 * Explain in detail how it would work.
 * Keep the scope as narrow as possible, to make it easier to implement.
-* Remember that this is a volunteer-driven project, and that contributions
-  are welcome :)
 
 Get Started!
 ------------
 
-Ready to contribute? Here's how to set up `mflux_ai` for local development.
+Ready to contribute? Here's how to set up `mflux-ai-python` for local development.
 
-1. Fork the `mflux_ai` repo on GitHub.
+1. Fork the `mflux-ai-python` repo on GitHub.
 2. Clone your fork locally::
 
-    $ git clone git@github.com:your_name_here/mflux_ai.git
+    $ git clone git@github.com:AIAScience/mflux-ai-python.git
 
 3. Install your local copy into a virtualenv. Assuming you have virtualenvwrapper installed, this is how you set up your fork for local development::
 
@@ -101,9 +97,9 @@ Before you submit a pull request, check that it meets these guidelines:
 1. The pull request should include tests.
 2. If the pull request adds functionality, the docs should be updated. Put
    your new functionality into a function with a docstring, and add the
-   feature to the list in README.rst.
-3. The pull request should work for Python 2.7, 3.4, 3.5 and 3.6, and for PyPy. Check
-   https://travis-ci.org/AIAScience/mflux_ai/pull_requests
+   feature to the list in README.md.
+3. The pull request should work for Python 3.4, 3.5, 3.6 and 3.7. Check
+   https://travis-ci.org/AIAScience/mflux-ai-python/pull_requests
    and make sure that the tests pass for all supported Python versions.
 
 Tips
@@ -117,12 +113,4 @@ $ py.test tests.test_mflux_ai
 Deploying
 ---------
 
-A reminder for the maintainers on how to deploy.
-Make sure all your changes are committed (including an entry in HISTORY.rst).
-Then run::
-
-$ bumpversion patch # possible: major / minor / patch
-$ git push
-$ git push --tags
-
-Travis will then deploy to PyPI if tests pass.
+See packaging.md in the git repository.
