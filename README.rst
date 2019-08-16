@@ -6,7 +6,7 @@ mflux-ai
 .. image:: https://img.shields.io/pypi/v/mflux_ai.svg
         :target: https://pypi.python.org/pypi/mflux_ai
 
-.. image:: https://img.shields.io/travis/AIAScience/mflux_ai.svg
+.. image:: https://img.shields.io/travis/AIAScience/mflux-ai-python.svg?branch=master
         :target: https://travis-ci.org/AIAScience/mflux-ai-python
 
 Open source code for the mflux-ai python library.
