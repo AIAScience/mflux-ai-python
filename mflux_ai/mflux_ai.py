@@ -35,27 +35,27 @@ def init(project_token):
         response = requests.get(url, headers=headers)
     except requests.exceptions.RequestException:
         print(
-            "Could not connect to the MFlux.ai server ({}). If this issue persists, please"
+            "Error: Could not connect to the MFlux.ai server ({}). If this issue persists, please"
             " contact MFlux.ai's support.".format(SERVER_HOST)
         )
         raise
 
     if response.status_code != 200:
         raise Exception(
-            "Unexpected status code {}. This may indicate that your project token is invalid.".format(
+            "Error: Bad status code {}. This may indicate that your project token is invalid.".format(
                 response.status_code
             )
         )
 
     data = response.json()
     if not data.get("mlflow_server", None):
-        print("Warning: Could not fetch mlflow_server connection string")
+        print("Error: Could not fetch mlflow_server connection string")
     if not data.get("minio_server", None):
-        print("Warning: Could not fetch minio_server connection string")
+        print("Error: Could not fetch minio_server connection string")
     if not data.get("minio_access_key", None):
-        print("Warning: Could not fetch minio_access_key connection string")
+        print("Error: Could not fetch minio_access_key connection string")
     if not data.get("minio_secret_key", None):
-        print("Warning: Could not fetch minio_secret_key connection string")
+        print("Error: Could not fetch minio_secret_key connection string")
 
     os.environ["MLFLOW_TRACKING_URI"] = data.get("mlflow_server", None)
     os.environ["MLFLOW_S3_ENDPOINT_URL"] = data.get("minio_server", None)
