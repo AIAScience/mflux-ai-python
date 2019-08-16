@@ -9,11 +9,12 @@ mflux-ai
 .. image:: https://img.shields.io/travis/AIAScience/mflux-ai-python.svg?branch=master
         :target: https://travis-ci.org/AIAScience/mflux-ai-python
 
-Open source code for the mflux-ai python library.
+Open source code for the :code:`mflux-ai` python library.
 
 Features
 --------
-- Acquire and set environment variables required by mflux-server
+- Fetch connection strings and tell MLflow how to connect with MFlux.ai
+- Download and upload objects/datasets from/to the MFlux.ai cloud service
 
 Quickstart
 ----------
@@ -21,15 +22,17 @@ Installation
 
     pip install mflux-ai
 
-Usage
+Basic usage
 
 .. code:: python
 
     import mflux_ai
 
-    mflux_ai.set_env_vars(token="insert_your_token_here")
+    mflux_ai.init("INSERT_YOUR_PROJECT_TOKEN_HERE")
 
-Storing and retrieving datasets
+    # MLflow now knows how to connect with your project server, hosted on MFlux.ai
+
+Store and retrieve datasets
 
 .. code:: python
 
