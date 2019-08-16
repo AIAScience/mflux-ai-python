@@ -21,9 +21,9 @@ setup(
     author="AIA Science AS",
     author_email="mflux.ai@aiascience.com",
     classifiers=[
-        "Development Status :: 2 - Pre-Alpha",
+        "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
-        "OSI Approved :: Apache Software License",
+        "License :: OSI Approved :: Apache Software License",
         "Natural Language :: English",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.4",
@@ -43,6 +43,6 @@ setup(
     test_suite="tests",
     tests_require=test_requirements,
     url='https://github.com/AIAScience/mflux-ai-python',
-    version='0.2.0',
+    version='0.2.1',
     zip_safe=False,
 )

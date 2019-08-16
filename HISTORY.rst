@@ -2,6 +2,11 @@
 History
 =======
 
+v0.2.1 (2019-08-16)
+-------------------
+
+* Set licence to Apache License 2.0. Transition from pre-alpha to alpha.
+
 v0.2.0 (2019-08-14)
 -------------------
 

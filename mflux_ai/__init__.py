@@ -4,7 +4,7 @@ from .mflux_ai import *
 
 __author__ = """AIA Science AS"""
 __email__ = "mflux.ai@aiascience.com"
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 
 
 def set_env_vars(token):
