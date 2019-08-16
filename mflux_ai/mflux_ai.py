@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*-
 
-"""Main module."""
-import json
 import os
+import tempfile
 
 import joblib
 import requests
-import tempfile
-
 from minio import Minio
 from minio.error import BucketAlreadyOwnedByYou, BucketAlreadyExists, ResponseError
 
@@ -15,70 +12,56 @@ SERVER_HOST = "https://www.mflux.ai"
 _minio_client = None
 
 
-class MfluxClient(object):
-    def __init__(self, token, server_host=SERVER_HOST):
-        server_ip = server_host + "/api/env_vars/"
-        token = token  # yourAccessTokenHere#
-        headers = {
-            "Content-Type": "application/json",
-            "Authorization": "api-key {}".format(token),
-        }
-        self.variables = dict()
-        self.cache_file_name = "aia-mflux-{token}.json".format(token=token)
-        try:
-            self.env_vars = requests.get(server_ip, headers=headers)
-        except requests.exceptions.RequestException as e:
-            print("Couldnt connect to mflux-server :", e)
-        if self.env_vars.status_code == 200:
-            self.variables = json.loads(self.env_vars.content)
+def init(project_token):
+    """
+    Fetch connection strings and set them as environment variables that MLflow understands and
+    uses when it connects to your MFlux.ai server.
 
-    def set_env_vars(self,):
-        if self.variables:
-            if not (
-                self.variables["minio_secret_key"]
-                and self.variables["minio_access_key"]
-                and self.variables["minio_server"]
-                and self.variables["mlflow_server"]
-            ):
-                return False
-            os.environ["MLFLOW_TRACKING_URI"] = self.variables["mlflow_server"]
-            os.environ["MLFLOW_S3_ENDPOINT_URL"] = self.variables["minio_server"]
-            os.environ["AWS_ACCESS_KEY_ID"] = self.variables["minio_access_key"]
-            os.environ["AWS_SECRET_ACCESS_KEY"] = self.variables["minio_secret_key"]
+    :param project_token: A secret string that is specific to an MFlux.ai project that you have
+        access to.
+    """
+    if "your_" in project_token.lower():
+        print(
+            "Warning: {} looks like an invalid project token. Go to"
+            " https://www.mflux.ai/dashboard/ to obtain your project token."
+        )
 
-            return True
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": "api-key {}".format(project_token),
+    }
+    url = SERVER_HOST + "/api/env_vars/"
+    try:
+        response = requests.get(url, headers=headers)
+    except requests.exceptions.RequestException:
+        print(
+            "Could not connect to the MFlux.ai server ({}). If this issue persists, please"
+            " contact MFlux.ai's support.".format(SERVER_HOST)
+        )
+        raise
 
-    def get_env_vars(self):
-        if self.set_env_vars():
-            variables = json.loads(self.env_vars.content)
-            return variables
-        else:
-            return self.variables
+    if response.status_code != 200:
+        raise Exception(
+            "Unexpected status code {}. This may indicate that your project token is invalid.".format(
+                response.status_code
+            )
+        )
 
-    def get_env_vars_from_cache_file(self):
-        try:
-            with open(self.cache_file_name, "r") as cache_file:
-                env_from_file = json.load(cache_file)
-                return env_from_file
-        except FileNotFoundError:
-            print("Could not open file:", self.cache_file_name)
+    data = response.json()
+    if not data.get("mlflow_server", None):
+        print("Warning: Could not fetch mlflow_server connection string")
+    if not data.get("minio_server", None):
+        print("Warning: Could not fetch minio_server connection string")
+    if not data.get("minio_access_key", None):
+        print("Warning: Could not fetch minio_access_key connection string")
+    if not data.get("minio_secret_key", None):
+        print("Warning: Could not fetch minio_secret_key connection string")
 
-    def set_env_vars_from_cache_file(self):
-        try:
-            with open(self.cache_file_name, "r") as cache_file:
-                self.variables = json.load(cache_file)
-                self.set_env_vars()
-
-        except FileNotFoundError:
-            print("Could not open file:", self.cache_file_name)
-
-    def save_cache_to_file(self):
-        if self.variables:
-            try:
-                with open(self.cache_file_name, "w") as cache_file:
-                    json.dump(self.variables, cache_file)
-            except IOError:
-                print("Could not create file:", self.cache_file_name)
+    os.environ["MLFLOW_TRACKING_URI"] = data.get("mlflow_server", None)
+    os.environ["MLFLOW_S3_ENDPOINT_URL"] = data.get("minio_server", None)
+    os.environ["AWS_ACCESS_KEY_ID"] = data.get("minio_access_key", None)
+    os.environ["AWS_SECRET_ACCESS_KEY"] = data.get("minio_secret_key", None)
+    os.environ["MFLUX_AI_PROJECT_TOKEN"] = project_token
 
 
 def get_minio_client():

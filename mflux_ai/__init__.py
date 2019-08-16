@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from .mflux_ai import *
+
 """Top-level package for mflux-ai."""
 
 __author__ = """AIA Science AS"""
@@ -8,9 +9,6 @@ __version__ = "0.2.1"
 
 
 def set_env_vars(token):
-    try:
-        MfluxClient(token=token).set_env_vars()
-        return True
-    except Exception as e:
-        print("couldn't connect to mflux server :", e)
-
+    # TODO: Uncomment the following deprecation warning later
+    # print('Warning: mflux_ai.set_env_vars is deprecated. Please use mflux.init instead.')
+    return init(token)
