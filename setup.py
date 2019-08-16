@@ -23,7 +23,7 @@ setup(
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
         "Intended Audience :: Developers",
-        "License :: OSI Approved :: BSD License",
+        "OSI Approved :: Apache Software License",
         "Natural Language :: English",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.4",
@@ -33,7 +33,7 @@ setup(
     ],
     description="Open source code for the mflux-ai python package",
     install_requires=requirements,
-    license="BSD license",
+    license="Apache License 2.0",
     long_description=readme + "\n\n" + history,
     include_package_data=True,
     keywords="mflux_ai",
