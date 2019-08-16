@@ -15,7 +15,7 @@ requirements = ["joblib<1", "minio>=4,<5", "requests"]
 
 setup_requirements = ["pytest-runner"]
 
-test_requirements = ["pytest"]
+test_requirements = ["pytest", "responses"]
 
 setup(
     author="AIA Science AS",
