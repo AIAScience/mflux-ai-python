@@ -31,7 +31,7 @@ setup(
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
     ],
-    description="Open source code for the mflux-ai python package",
+    description="The Python client for MFlux.ai",
     install_requires=requirements,
     license="Apache License 2.0",
     long_description=readme + "\n\n" + history,
