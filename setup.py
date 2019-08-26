@@ -34,7 +34,7 @@ setup(
     license="Apache License 2.0",
     long_description=readme + "\n\n" + history,
     include_package_data=True,
-    keywords="mflux_ai",
+    keywords="mflux_ai mlflow ml tracking ai workflow object storage dataset versioning",
     name="mflux-ai",
     packages=find_packages(include=["mflux_ai"]),
     setup_requires=setup_requirements,
