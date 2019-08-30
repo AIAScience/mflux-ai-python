@@ -3,6 +3,7 @@
 
 """Tests for the `mflux_ai` package."""
 import os
+import warnings
 
 import responses
 
@@ -50,7 +51,14 @@ def test_mflux_ai_deprecated_set_env_vars():
         )
     )
 
-    mflux_ai.set_env_vars("thisshouldbevalidtoken")
+    with warnings.catch_warnings(record=True) as w:
+        # Cause all warnings to always be triggered.
+        warnings.simplefilter("always")
+        mflux_ai.set_env_vars("thisshouldbevalidtoken")
+        assert len(w) == 1
+        assert issubclass(w[-1].category, DeprecationWarning)
+        assert "deprecated" in str(w[-1].message)
+
     assert os.environ.get("MLFLOW_TRACKING_URI") == content["mlflow_server"]
     assert os.environ.get("MLFLOW_S3_ENDPOINT_URL") == content["minio_server"]
     assert os.environ.get("AWS_SECRET_ACCESS_KEY") == content["minio_secret_key"]
