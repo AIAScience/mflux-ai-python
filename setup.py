@@ -40,8 +40,8 @@ setup(
     setup_requires=setup_requirements,
     test_suite="tests",
     tests_require=test_requirements,
-    python_requires='>=3.5, <4',
-    url='https://github.com/AIAScience/mflux-ai-python',
-    version='0.3.0',
+    python_requires=">=3.5, <4",
+    url="https://github.com/AIAScience/mflux-ai-python",
+    version="0.4.0",
     zip_safe=False,
 )

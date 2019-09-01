@@ -2,14 +2,14 @@
 mflux-ai
 ========
 
-
 .. image:: https://img.shields.io/pypi/v/mflux_ai.svg
         :target: https://pypi.python.org/pypi/mflux_ai
 
 .. image:: https://img.shields.io/travis/AIAScience/mflux-ai-python.svg?branch=master
         :target: https://travis-ci.org/AIAScience/mflux-ai-python
 
-Open source code for the :code:`mflux-ai` python library.
+This is the official :code:`mflux-ai` python library for `MFlux.ai
+<https://www.mflux.ai>`_
 
 Features
 --------
