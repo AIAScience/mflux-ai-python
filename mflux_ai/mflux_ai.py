@@ -72,13 +72,18 @@ def get_minio_client():
     assert os.environ.get("AWS_ACCESS_KEY_ID", None) is not None
     assert os.environ.get("AWS_SECRET_ACCESS_KEY", None) is not None
     if not _minio_client:
-        _minio_client = Minio(
+        is_secure = "https://" in os.environ["MLFLOW_S3_ENDPOINT_URL"]
+        endpoint = (
             os.environ["MLFLOW_S3_ENDPOINT_URL"]
             .replace("http://", "")
-            .replace(":9000/", ":9000"),
+            .replace("https://", "")
+            .replace(":9000/", ":9000")  # TODO: Remove this replace
+        )
+        _minio_client = Minio(
+            endpoint,
             access_key=os.environ["AWS_ACCESS_KEY_ID"],
             secret_key=os.environ["AWS_SECRET_ACCESS_KEY"],
-            secure=False,
+            secure=is_secure,
         )
 
     return _minio_client
