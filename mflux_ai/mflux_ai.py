@@ -23,11 +23,13 @@ def init(project_token):
     if "your_" in project_token.lower():
         print(
             "Warning: {} looks like an invalid project token. Go to"
-            " https://www.mflux.ai/dashboard/ to obtain your project token."
+            " {}/dashboard/ to obtain your project token.".format(
+                project_token, SERVER_HOST
+            )
         )
 
     headers = {
-        "Content-Type": "application/json",
+        "Accept": "application/vnd.aiascience.mflux+json; version=0.4",
         "Authorization": "api-key {}".format(project_token),
     }
     url = SERVER_HOST + "/api/env_vars/"
@@ -35,17 +37,34 @@ def init(project_token):
         response = requests.get(url, headers=headers)
     except requests.exceptions.RequestException:
         print(
-            "Error: Could not connect to the MFlux.ai server ({}). If this issue persists, please"
-            " contact MFlux.ai's support.".format(SERVER_HOST)
+            "Error: Could not connect to the MFlux.ai server ({}). If this issue persists,"
+            " please contact MFlux.ai's support.".format(SERVER_HOST)
         )
         raise
 
     if response.status_code != 200:
-        raise Exception(
-            "Error: Bad status code {}. This may indicate that your project token is invalid.".format(
-                response.status_code
+        if response.status_code == 406 and "Invalid version" in str(response.content):
+            # We import __version__ here to avoid circular imports
+            from . import __version__
+
+            raise Exception(
+                "Error: Bad status code {}. This may indicate your mflux-ai python package"
+                " needs to be upgraded to a newer version. Currently, mflux-ai=={} is"
+                " installed. Go to https://pypi.org/project/mflux-ai/ to see what the latest"
+                " version of mflux-ai is.".format(
+                    response.status_code, __version__
+                )
             )
-        )
+        elif response.status_code == 204:
+            raise Exception(
+                "Error: Bad status code {}. This may indicate that your project token is"
+                " invalid.".format(response.status_code)
+            )
+        else:
+            raise Exception(
+                "Error: Bad status code {}. If this issue persists,"
+                " please contact MFlux.ai's support.".format(response.status_code)
+            )
 
     data = response.json()
     if not data.get("mlflow_server", None):
