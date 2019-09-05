@@ -62,6 +62,7 @@ def init(project_token):
     os.environ["AWS_ACCESS_KEY_ID"] = data.get("minio_access_key", None)
     os.environ["AWS_SECRET_ACCESS_KEY"] = data.get("minio_secret_key", None)
     os.environ["MFLUX_AI_PROJECT_TOKEN"] = project_token
+    os.environ["MLFLOW_TRACKING_TOKEN"] = project_token
 
 
 def get_minio_client():
