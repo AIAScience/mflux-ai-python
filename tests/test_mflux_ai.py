@@ -32,7 +32,7 @@ def test_mflux_ai_init():
     assert os.environ.get("MLFLOW_S3_ENDPOINT_URL") == content["minio_server"]
     assert os.environ.get("AWS_SECRET_ACCESS_KEY") == content["minio_secret_key"]
     assert os.environ.get("AWS_ACCESS_KEY_ID") == content["minio_access_key"]
-    assert os.environ.get("MFLUX_AI_PROJECT_TOKEN") == "thisshouldbevalidtoken"
+    assert os.environ.get("MLFLOW_TRACKING_TOKEN") == "thisshouldbevalidtoken"
 
 
 @responses.activate
@@ -63,4 +63,4 @@ def test_mflux_ai_deprecated_set_env_vars():
     assert os.environ.get("MLFLOW_S3_ENDPOINT_URL") == content["minio_server"]
     assert os.environ.get("AWS_SECRET_ACCESS_KEY") == content["minio_secret_key"]
     assert os.environ.get("AWS_ACCESS_KEY_ID") == content["minio_access_key"]
-    assert os.environ.get("MFLUX_AI_PROJECT_TOKEN") == "thisshouldbevalidtoken"
+    assert os.environ.get("MLFLOW_TRACKING_TOKEN") == "thisshouldbevalidtoken"
