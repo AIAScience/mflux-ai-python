@@ -2,6 +2,14 @@
 History
 =======
 
+v0.5.1 (2019-09-12)
+-------------------
+
+* Add support for MLflow authentication
+* Improve the performance of :code:`mflux_ai.put_dataset`
+* Correctly reset the MinIO client when :code:`init` completes successfully
+* Specify the desired API version and let the user know if an upgrade is needed
+
 v0.4.0 (2019-09-01)
 -------------------
 
