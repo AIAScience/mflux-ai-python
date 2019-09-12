@@ -6,7 +6,12 @@ import tempfile
 import joblib
 import requests
 from minio import Minio
-from minio.error import BucketAlreadyOwnedByYou, BucketAlreadyExists, ResponseError
+from minio.error import (
+    BucketAlreadyOwnedByYou,
+    BucketAlreadyExists,
+    NoSuchBucket,
+    ResponseError,
+)
 
 SERVER_HOST = "https://www.mflux.ai"
 _minio_client = None
@@ -52,9 +57,7 @@ def init(project_token):
                 "Error: Bad status code {}. This may indicate your mflux-ai python package"
                 " needs to be upgraded to a newer version. Currently, mflux-ai=={} is"
                 " installed. Go to https://pypi.org/project/mflux-ai/ to see what the latest"
-                " version of mflux-ai is.".format(
-                    response.status_code, __version__
-                )
+                " version of mflux-ai is.".format(response.status_code, __version__)
             )
         elif response.status_code == 204:
             raise Exception(
@@ -139,17 +142,21 @@ def put_dataset(value, object_name, bucket_name="datasets"):
     """
     minio_client = get_minio_client()
 
-    ensure_bucket_exists(bucket_name)
-
     tmp_file_path = os.path.join(tempfile.gettempdir(), object_name)
     joblib.dump(value, tmp_file_path, compress=True)
 
-    try:
-        minio_client.fput_object(
-            bucket_name, object_name=object_name, file_path=tmp_file_path
-        )
-    except ResponseError as err:
-        print(err)
+    for _ in range(2):
+        try:
+            minio_client.fput_object(
+                bucket_name, object_name=object_name, file_path=tmp_file_path
+            )
+            break  # Success! Now exit the loop
+        except ResponseError as err:
+            print(err)
+            break  # Failure, no retry
+        except NoSuchBucket:
+            ensure_bucket_exists(bucket_name)
+            continue  # Try the object upload again now that the bucket has been created
 
 
 def get_dataset(object_name, bucket_name="datasets"):
