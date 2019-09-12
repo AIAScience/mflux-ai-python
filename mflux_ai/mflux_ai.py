@@ -20,6 +20,7 @@ def init(project_token):
     :param project_token: A secret string that is specific to an MFlux.ai project that you have
         access to.
     """
+    global _minio_client
     if "your_" in project_token.lower():
         print(
             "Warning: {} looks like an invalid project token. Go to"
@@ -76,6 +77,7 @@ def init(project_token):
     if not data.get("minio_secret_key", None):
         print("Error: Could not fetch minio_secret_key connection string")
 
+    _minio_client = None
     os.environ["MLFLOW_TRACKING_URI"] = data.get("mlflow_server", None)
     os.environ["MLFLOW_S3_ENDPOINT_URL"] = data.get("minio_server", None)
     os.environ["AWS_ACCESS_KEY_ID"] = data.get("minio_access_key", None)
