@@ -1,6 +1,9 @@
 =======
 History
 =======
+v0.5.0 (2019-09-01)
+-------------------
+* add set MLFLOW_TRACKING_TOKEN token in :code:`init`
 
 v0.4.0 (2019-09-01)
 -------------------
