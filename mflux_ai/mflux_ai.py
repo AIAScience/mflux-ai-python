@@ -28,7 +28,7 @@ def init(project_token):
     global _minio_client
     if "your_" in project_token.lower():
         print(
-            "Warning: {} looks like an invalid project token. Go to"
+            'Warning: "{}" looks like an invalid project token. Go to'
             " {}/dashboard/ to obtain your project token.".format(
                 project_token, SERVER_HOST
             )
