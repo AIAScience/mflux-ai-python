@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import io
 import os
 import tempfile
 
@@ -142,14 +143,16 @@ def put_dataset(value, object_name, bucket_name="datasets"):
     """
     minio_client = get_minio_client()
 
-    tmp_file_path = os.path.join(tempfile.gettempdir(), object_name)
-    joblib.dump(value, tmp_file_path, compress=True)
+    in_memory_file = io.BytesIO()
+    joblib.dump(value, in_memory_file, compress=True)
+    num_bytes = in_memory_file.getbuffer().nbytes
+
+    # Prepare for the read() call on the in-memory file object
+    in_memory_file.seek(0)
 
     for _ in range(2):
         try:
-            minio_client.fput_object(
-                bucket_name, object_name=object_name, file_path=tmp_file_path
-            )
+            minio_client.put_object(bucket_name, object_name, in_memory_file, num_bytes)
             break  # Success! Now exit the loop
         except ResponseError as err:
             print(err)
