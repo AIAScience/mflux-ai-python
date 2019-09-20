@@ -2,6 +2,11 @@
 History
 =======
 
+v0.5.2 (2019-09-20)
+-------------------
+
+* Improve the performance of :code:`mflux_ai.put_dataset` by pickling in memory instead of using a temporary file on disk.
+
 v0.5.1 (2019-09-12)
 -------------------
 
