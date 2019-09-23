@@ -2,7 +2,6 @@
 
 import io
 import os
-import tempfile
 
 import joblib
 import requests
@@ -169,13 +168,15 @@ def get_dataset(object_name, bucket_name="datasets"):
     """
     minio_client = get_minio_client()
 
-    downloaded_file_path = os.path.join(tempfile.gettempdir(), object_name)
+    in_memory_file = io.BytesIO()
     try:
         data = minio_client.get_object(bucket_name, object_name)
-        with open(downloaded_file_path, "wb") as file_data:
-            for d in data.stream(32 * 1024):
-                file_data.write(d)
+        for d in data.stream(32 * 1024):
+            in_memory_file.write(d)
     except ResponseError as err:
         raise
 
-    return joblib.load(downloaded_file_path)
+    # Prepare for the read() call on the in-memory file object
+    in_memory_file.seek(0)
+
+    return joblib.load(in_memory_file)
