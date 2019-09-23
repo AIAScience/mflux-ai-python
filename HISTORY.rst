@@ -2,6 +2,12 @@
 History
 =======
 
+v0.5.3 (2019-09-23)
+-------------------
+
+* Improve the performance and the support for special characters in object names in :code:`mflux_ai.get_dataset` by unpickling in memory instead of using a temporary file on disk.
+* Don't expose non-public variables and imports on the top-level package
+
 v0.5.2 (2019-09-20)
 -------------------
 

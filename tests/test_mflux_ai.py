@@ -8,7 +8,7 @@ import warnings
 import responses
 
 import mflux_ai
-from mflux_ai import SERVER_HOST
+from mflux_ai.mflux_ai import SERVER_HOST
 
 
 @responses.activate
