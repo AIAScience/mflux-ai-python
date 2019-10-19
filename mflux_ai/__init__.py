@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import warnings
 
-from .mflux_ai import (
+from .core import (
     init,
     get_minio_client,
     ensure_bucket_exists,
