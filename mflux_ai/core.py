@@ -2,6 +2,7 @@
 
 import io
 import os
+import warnings
 
 import joblib
 import requests
@@ -26,13 +27,30 @@ def init(project_token):
         access to.
     """
     global _minio_client
+    global SERVER_HOST
     if "your_" in project_token.lower():
         print(
             'Warning: "{}" looks like an invalid project token. Go to'
-            " {}/dashboard/ to obtain your project token.".format(
-                project_token, SERVER_HOST
-            )
+            " {}/dashboard/ to obtain your project token.".format(project_token, SERVER_HOST)
         )
+
+    from mflux_ai.mflux_ai import SERVER_HOST as DEPRECATED_SERVER_HOST_VARIABLE
+
+    if DEPRECATED_SERVER_HOST_VARIABLE != "https://www.mflux.ai":
+        warnings.warn(
+            "The internal SERVER_HOST variable has been moved. If you are doing\n"
+            "from mflux_ai import mflux_ai\n"
+            "mflux_ai.SERVER_HOST = ...\n"
+            "or\n"
+            "import mflux_ai\n"
+            "mflux_ai.mflux_ai.SERVER_HOST = ...\n"
+            "then you should instead do this:\n"
+            "import mflux_ai\n"
+            "mflux_ai.core.SERVER_HOST = ...",
+            DeprecationWarning,
+        )
+        # Note: This will be changed from warning to error in a future version
+        SERVER_HOST = DEPRECATED_SERVER_HOST_VARIABLE
 
     headers = {
         "Accept": "application/vnd.aiascience.mflux+json; version=0.4",
