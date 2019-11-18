@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import warnings
 
-from .mflux_ai import (
+from .core import (
     init,
     get_minio_client,
     ensure_bucket_exists,
@@ -18,7 +18,7 @@ __version__ = "0.5.3"
 
 def set_env_vars(token):
     warnings.warn(
-        "mflux_ai.set_env_vars() is deprecated. Please use mflux.init() instead.",
+        "mflux_ai.set_env_vars() is deprecated. Please use mflux_ai.init() instead.",
         DeprecationWarning,
     )
     return init(token)
