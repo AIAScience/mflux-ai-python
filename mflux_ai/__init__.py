@@ -8,7 +8,7 @@ from .core import init, get_minio_client, ensure_bucket_exists, put_dataset, get
 
 __author__ = """AIA Science AS"""
 __email__ = "mflux.ai@aiascience.com"
-__version__ = "0.5.3"
+__version__ = "0.6.0"
 
 
 def set_env_vars(token):

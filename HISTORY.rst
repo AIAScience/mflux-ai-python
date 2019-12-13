@@ -2,6 +2,11 @@
 History
 =======
 
+v0.6.0 (2019-12-13)
+-------------------
+
+* Move functions from mflux_ai.mflux_ai to mflux_ai.core. The API stays backwards-compatible for now, but warnings are shown if the old API is used. This change was applied to get cleaner and more consistent import statements.
+
 v0.5.3 (2019-09-23)
 -------------------
 
