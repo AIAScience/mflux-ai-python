@@ -1,13 +1,8 @@
 # -*- coding: utf-8 -*-
 import warnings
 
-from .core import (
-    init,
-    get_minio_client,
-    ensure_bucket_exists,
-    put_dataset,
-    get_dataset,
-)
+import mflux_ai.mflux_ai as mflux_ai
+from .core import init, get_minio_client, ensure_bucket_exists, put_dataset, get_dataset
 
 """Top-level package for mflux-ai."""
 
