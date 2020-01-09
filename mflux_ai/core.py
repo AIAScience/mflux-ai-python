@@ -15,6 +15,9 @@ from minio.error import (
 )
 
 SERVER_HOST = "https://www.mflux.ai"
+#mflux_ai.core.SERVER_HOST = "http://localhost:8000"
+
+
 _minio_client = None
 
 
@@ -198,3 +201,63 @@ def get_dataset(object_name, bucket_name="datasets"):
     in_memory_file.seek(0)
 
     return joblib.load(in_memory_file)
+
+
+def get_best_run(model_group_name):
+    """
+    Fetch the run id for the best run in a model group
+
+    :param model_group_name:
+    """
+
+    project_token = os.environ["MLFLOW_TRACKING_TOKEN"]
+
+
+    headers = {
+        "Content-Type": "application/vnd.aiascience.mflux+json; version=0.4",
+        "Authorization": "api-key {}".format(project_token),
+    }
+    url = SERVER_HOST + "/api/best_run_by_model_group/best_run/?model_group_name={}".format(model_group_name)
+    try:
+        response = requests.get(url, headers=headers)
+        print(response)
+    except requests.exceptions.RequestException:
+        print(
+            "Error: Could not connect to the MFlux.ai server ({}). If this issue persists,"
+            " please contact MFlux.ai's support.".format(SERVER_HOST)
+
+        )
+        raise
+
+    if response.status_code != 200:
+        if response.status_code == 406 and "Invalid version" in str(response.content):
+            # We import __version__ here to avoid circular imports
+            from . import __version__
+
+            raise Exception(
+                "Error: Bad status code {}. This may indicate your mflux-ai python package"
+                " needs to be upgraded to a newer version. Currently, mflux-ai=={} is"
+                " installed. Go to https://pypi.org/project/mflux-ai/ to see what the latest"
+                " version of mflux-ai is.".format(response.status_code, __version__)
+            )
+        elif response.status_code == 204:
+            raise Exception(
+                "Error: Bad status code {}. This may indicate that your project token is"
+                " invalid.".format(response.status_code)
+            )
+        elif response.status_code == 404:
+            raise Exception(
+                "Error: Bad status code {}. This may indicate that the model group does"
+                " not exists.".format(response.status_code)
+            )
+        else:
+            raise Exception(
+                "Error: Bad status code {}. If this issue persists,"
+                " please contact MFlux.ai's support.".format(response.status_code)
+            )
+
+    data = response.json()
+    return data
+
+
+

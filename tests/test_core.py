@@ -64,3 +64,44 @@ def test_mflux_ai_deprecated_set_env_vars():
     assert os.environ.get("AWS_SECRET_ACCESS_KEY") == content["minio_secret_key"]
     assert os.environ.get("AWS_ACCESS_KEY_ID") == content["minio_access_key"]
     assert os.environ.get("MLFLOW_TRACKING_TOKEN") == "thisshouldbevalidtoken"
+
+
+@responses.activate
+def test_get_best_run():
+
+    content = {
+        "minio_secret_key": "minio_secret",
+        "minio_access_key": "minio_access",
+        "minio_server": "http://192.198.0.1:9000",
+        "mlflow_server": "http://192.198.0.1:5000",
+    }
+
+
+    responses.add(
+        responses.Response(
+            method="GET", url=SERVER_HOST + "/api/env_vars/", json=content, status=200
+        )
+    )
+
+    mflux_ai.init("thisshouldbevalidtoken")
+
+    content = {
+    "run_uuid" : "123"
+    }
+
+    headers = {
+        "Content-Type": "application/vnd.aiascience.mflux+json; version=0.4",
+        "Authorization": "api-key {}".format("thisshouldbevalidtoken"),
+    }
+
+    url = SERVER_HOST + "/api/best_run_by_model_group/best_run/?model_group_name={}".format("model_name")
+
+    responses.add(
+        responses.Response(
+            method="GET", url=url, json=content, status=200, headers= headers
+        )
+    )
+
+    best_run = mflux_ai.core.get_best_run("model_name")
+    assert best_run['run_uuid'] == content['run_uuid']
+
