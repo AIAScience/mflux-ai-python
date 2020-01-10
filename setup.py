@@ -14,7 +14,7 @@ with open("README.rst") as readme_file:
 with open("HISTORY.rst") as history_file:
     history = history_file.read()
 
-requirements = ["joblib<1", "minio>=4,<5", "requests"]
+requirements = ["joblib<1", "minio>=4,<5", "mlflow>=1.2.0,<2", "requests"]
 
 setup_requirements = ["pytest-runner"]
 
