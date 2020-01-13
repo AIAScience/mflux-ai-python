@@ -15,8 +15,7 @@ from minio.error import (
 )
 import mlflow
 
-SERVER_HOST = "http://localhost:8000"
-
+SERVER_HOST = "https://www.mflux.ai"
 
 _minio_client = None
 
