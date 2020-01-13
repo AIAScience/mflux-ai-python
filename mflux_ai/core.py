@@ -13,9 +13,9 @@ from minio.error import (
     NoSuchBucket,
     ResponseError,
 )
+import mlflow
 
-SERVER_HOST = "https://www.mflux.ai"
-#mflux_ai.core.SERVER_HOST = "http://localhost:8000"
+SERVER_HOST = "http://localhost:8000"
 
 
 _minio_client = None
@@ -210,22 +210,26 @@ def get_best_run(model_group_name):
     :param model_group_name:
     """
 
-    project_token = os.environ["MLFLOW_TRACKING_TOKEN"]
+    if "MLFLOW_TRACKING_TOKEN" not in os.environ:
+        raise Exception(
+            "Could not find the MFlux.ai project token for authentication. Please call mflux_ai.init('your_project_token_goes_here') before calling mflux_ai.get_best_run()"
+        )
 
+    project_token = os.environ["MLFLOW_TRACKING_TOKEN"]
 
     headers = {
         "Content-Type": "application/vnd.aiascience.mflux+json; version=0.4",
         "Authorization": "api-key {}".format(project_token),
     }
-    url = SERVER_HOST + "/api/best_run_by_model_group/best_run/?model_group_name={}".format(model_group_name)
+    url = SERVER_HOST + "/api/best_run_by_model_group/best_run/?model_group_name={}".format(
+        model_group_name
+    )
     try:
         response = requests.get(url, headers=headers)
-        print(response)
     except requests.exceptions.RequestException:
         print(
             "Error: Could not connect to the MFlux.ai server ({}). If this issue persists,"
             " please contact MFlux.ai's support.".format(SERVER_HOST)
-
         )
         raise
 
@@ -240,11 +244,6 @@ def get_best_run(model_group_name):
                 " installed. Go to https://pypi.org/project/mflux-ai/ to see what the latest"
                 " version of mflux-ai is.".format(response.status_code, __version__)
             )
-        elif response.status_code == 204:
-            raise Exception(
-                "Error: Bad status code {}. This may indicate that your project token is"
-                " invalid.".format(response.status_code)
-            )
         elif response.status_code == 404:
             raise Exception(
                 "Error: Bad status code {}. This may indicate that the model group does"
@@ -257,7 +256,11 @@ def get_best_run(model_group_name):
             )
 
     data = response.json()
-    return data
+    run_id = data["run_uuid"]
 
+    if run_id is None:
+        return None
 
-
+    client = mlflow.tracking.MlflowClient()
+    run = client.get_run(run_id)
+    return run
