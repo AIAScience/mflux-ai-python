@@ -70,17 +70,18 @@ def test_mflux_ai_deprecated_set_env_vars():
 
 @responses.activate
 def test_get_best_run():
-
     env_content = {
         "minio_secret_key": "minio_secret",
         "minio_access_key": "minio_access",
         "minio_server": "http://192.198.0.1:9000",
         "mlflow_server": "http://192.198.0.1:5000",
     }
-
     responses.add(
         responses.Response(
-            method="GET", url=SERVER_HOST + "/api/env_vars/", json=env_content, status=200
+            method="GET",
+            url=SERVER_HOST + "/api/env_vars/",
+            json=env_content,
+            status=200,
         )
     )
 
@@ -93,7 +94,6 @@ def test_get_best_run():
         "Connection": "keep-alive",
         "Authorization": "Bearer thisshouldbevalidtoken",
     }
-
     content = {
         "run": {
             "info": {
@@ -116,7 +116,9 @@ def test_get_best_run():
                         "step": "49",
                     }
                 ],
-                "params": [{"key": "optimizer_name", "value": "FastGANoisyDiscreteOnePlusOne"}],
+                "params": [
+                    {"key": "optimizer_name", "value": "FastGANoisyDiscreteOnePlusOne"}
+                ],
                 "tags": [
                     {"key": "mlflow.user", "value": "Iver"},
                     {
@@ -128,15 +130,24 @@ def test_get_best_run():
             },
         }
     }
-
-    url = (
-        env_content["mlflow_server"]
-        + "/api/2.0/preview/mlflow/runs/get?run_uuid=123&run_id=123"
-    )
-
+    # Mock two different URLs to account for differences in mlflow versions
     responses.add(
-        responses.Response(method="GET", url=url, json=content, status=200, headers=headers),
-        match_querystring=True,
+        responses.Response(
+            method="GET",
+            url=env_content["mlflow_server"] + "/api/2.0/preview/mlflow/runs/get",
+            json=content,
+            status=200,
+            headers=headers,
+        ),
+    )
+    responses.add(
+        responses.Response(
+            method="GET",
+            url=env_content["mlflow_server"] + "/api/2.0/mlflow/runs/get",
+            json=content,
+            status=200,
+            headers=headers,
+        ),
     )
 
     headers = {
@@ -144,13 +155,16 @@ def test_get_best_run():
         "Authorization": "api-key {}".format("thisshouldbevalidtoken"),
     }
     content = {"run_uuid": "123"}
-
-    url = SERVER_HOST + "/api/best_run_by_model_group/best_run/?model_group_name={}".format(
-        "model_name"
+    url = (
+        SERVER_HOST
+        + "/api/best_run_by_model_group/best_run/?model_group_name={}".format(
+            "model_name"
+        )
     )
-
     responses.add(
-        responses.Response(method="GET", url=url, json=content, status=200, headers=headers)
+        responses.Response(
+            method="GET", url=url, json=content, status=200, headers=headers
+        )
     )
 
     best_run = mflux_ai.core.get_best_run("model_name")
