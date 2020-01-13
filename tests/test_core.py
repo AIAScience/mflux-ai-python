@@ -135,14 +135,8 @@ def test_get_best_run():
     )
 
     responses.add(
-        responses.Response(
-            method="GET",
-            url=url,
-            json=content,
-            status=200,
-            headers=headers,
-            match_querystring=True,
-        )
+        responses.Response(method="GET", url=url, json=content, status=200, headers=headers),
+        match_querystring=True,
     )
 
     headers = {
