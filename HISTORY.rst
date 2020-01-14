@@ -2,7 +2,7 @@
 History
 =======
 
-v0.7.0 (TBA)
+v0.7.0 (2020-01-14)
 -------------------
 
 * Implement :code:`mflux_ai.get_best_run()`, which returns the best run in a model group defined in MFlux.ai.

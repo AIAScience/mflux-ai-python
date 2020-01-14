@@ -15,7 +15,7 @@ from .core import (
 
 __author__ = """AIA Science AS"""
 __email__ = "mflux.ai@aiascience.com"
-__version__ = "0.6.0"
+__version__ = "0.7.0"
 
 
 def set_env_vars(token):
