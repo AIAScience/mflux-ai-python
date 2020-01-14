@@ -5,7 +5,7 @@ History
 v0.7.0 (TBA)
 -------------------
 
-* Implement :code:`get_best_run()`, which returns the best run in a model group defined in MFlux.ai.
+* Implement :code:`mflux_ai.get_best_run()`, which returns the best run in a model group defined in MFlux.ai.
 
 v0.6.0 (2019-12-13)
 -------------------

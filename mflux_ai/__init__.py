@@ -2,7 +2,14 @@
 import warnings
 
 import mflux_ai.mflux_ai as mflux_ai
-from .core import init, get_minio_client, ensure_bucket_exists, put_dataset, get_dataset
+from .core import (
+    init,
+    get_minio_client,
+    ensure_bucket_exists,
+    put_dataset,
+    get_dataset,
+    get_best_run,
+)
 
 """Top-level package for mflux-ai."""
 

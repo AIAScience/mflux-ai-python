@@ -167,6 +167,6 @@ def test_get_best_run():
         )
     )
 
-    best_run = mflux_ai.core.get_best_run("model_name")
+    best_run = mflux_ai.get_best_run("model_name")
     assert isinstance(best_run, mlflow.entities.run.Run)
     assert best_run.info.run_uuid == content["run_uuid"]

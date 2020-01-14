@@ -33,7 +33,9 @@ def init(project_token):
     if "your_" in project_token.lower():
         print(
             'Warning: "{}" looks like an invalid project token. Go to'
-            " {}/dashboard/ to obtain your project token.".format(project_token, SERVER_HOST)
+            " {}/dashboard/ to obtain your project token.".format(
+                project_token, SERVER_HOST
+            )
         )
 
     from mflux_ai.mflux_ai import SERVER_HOST as DEPRECATED_SERVER_HOST_VARIABLE
@@ -220,8 +222,11 @@ def get_best_run(model_group_name):
         "Content-Type": "application/vnd.aiascience.mflux+json; version=0.4",
         "Authorization": "api-key {}".format(project_token),
     }
-    url = SERVER_HOST + "/api/best_run_by_model_group/best_run/?model_group_name={}".format(
-        model_group_name
+    url = (
+        SERVER_HOST
+        + "/api/best_run_by_model_group/best_run/?model_group_name={}".format(
+            model_group_name
+        )
     )
     try:
         response = requests.get(url, headers=headers)
