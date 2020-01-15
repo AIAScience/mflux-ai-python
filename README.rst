@@ -46,7 +46,7 @@ Store and retrieve datasets
     assert_array_equal(my_dataset, my_loaded_dataset)
     
 
-Fetch the best run in a model group defined in MFlux.ai. Runs are evaluated on one or two metrics defined in Mflux.ai.
+Fetch the best run in a model group defined in MFlux.ai. Runs are evaluated on one or two metrics defined in MFlux.ai.
 
 .. code:: python
 
