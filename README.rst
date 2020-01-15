@@ -51,12 +51,12 @@ Fetch the best run in a model group defined in MFlux.ai. Runs are evaluated on o
 .. code:: python
 
     best_run = mflux_ai.get_best_run("classification")
-
     assert isinstance(run, mlflow.entities.run.Run)
+    
     # You can now use the run class to fetch info about the run, for instance metrics and run id
-    run_id = best_run.data.metrics
-
+    metrics = best_run.data.metrics
     run_id = best_run.info.run_uuid
+    
     # You can fetch the artifact_uri to load the model
     model = mlflow.sklearn.load_model(best_run.info.artifact_uri+"/model")
 
