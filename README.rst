@@ -58,6 +58,6 @@ Fetch the best run in a model group defined in MFlux.ai. Runs are evaluated on o
     run_id = best_run.info.run_uuid
     
     # You can fetch the artifact_uri to load the model
-    model = mlflow.sklearn.load_model(best_run.info.artifact_uri+"/model")
+    model = mlflow.sklearn.load_model(best_run.info.artifact_uri + "/model")
 
     
